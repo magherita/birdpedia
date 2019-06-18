@@ -12,17 +12,9 @@ type Bird struct {
 	Description string `json:"description"`
 }
 
-func getBirdHandler(w http.ResponseWriter, r *http.Request) {
-	/*
-		The list of birds is now taken from the store instead of the package level  `birds` variable we had earlier
-
-		The `store` variable is the package level variable that we defined in
-		`store.go`, and is initialized during the initialization phase of the
-		application
-	*/
+func getBirdHandler(w http.ResponseWriter, r *http.Request) {	
 	birds, err := db.GetBirds()
 
-	// Everything else is the same as before
 	birdListBytes, err := json.Marshal(birds)
 
 	if err != nil {
@@ -47,8 +39,6 @@ func createBirdHandler(w http.ResponseWriter, r *http.Request) {
 	bird.Species = r.Form.Get("species")
 	bird.Description = r.Form.Get("description")
 
-	// The only change we made here is to use the `CreateBird` method instead of
-	// appending to the `bird` variable like we did earlier
 	err = db.CreateBird(&bird)
 	if err != nil {
 		fmt.Println(err)
