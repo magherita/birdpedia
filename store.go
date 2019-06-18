@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// The store variable is a package level variable that will be available for
+// The db variable is a package level variable that will be available for
 // use throughout our application code
 var db Database
 
